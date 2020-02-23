@@ -1,4 +1,4 @@
-package com.frank.ffmpeg.activity
+package com.frank.ffmpeg.kotlin.activity
 
 import android.annotation.SuppressLint
 import android.media.MediaPlayer

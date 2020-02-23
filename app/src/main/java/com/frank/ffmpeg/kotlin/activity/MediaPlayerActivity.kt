@@ -1,4 +1,4 @@
-package com.frank.ffmpeg.activity
+package com.frank.ffmpeg.kotlin.activity
 
 import android.os.Bundle
 import android.util.Log
