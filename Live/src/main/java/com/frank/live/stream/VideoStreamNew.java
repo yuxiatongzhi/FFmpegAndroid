@@ -1,4 +1,4 @@
-package com.frank.live.Push;
+package com.frank.live.stream;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,53 +6,39 @@ import android.graphics.Point;
 import android.graphics.SurfaceTexture;
 import android.util.Log;
 import android.util.Size;
+import android.view.SurfaceHolder;
 import android.view.TextureView;
 
-import com.frank.live.LiveUtil;
+import com.frank.live.LivePusherNew;
 import com.frank.live.camera2.Camera2Helper;
 import com.frank.live.camera2.Camera2Listener;
 import com.frank.live.param.VideoParam;
 
 /**
  * 视频推流:使用Camera2
- * Created by frank on 2019/12/18.
+ * Created by frank on 2020/02/12.
  */
+public class VideoStreamNew implements TextureView.SurfaceTextureListener, Camera2Listener {
 
-public class VideoPusherNew extends Pusher implements TextureView.SurfaceTextureListener, Camera2Listener {
-    private final static String TAG = VideoPusherNew.class.getSimpleName();
+    private static final String TAG = VideoStreamNew.class.getSimpleName();
 
-    private VideoParam mVideoParam;
+    private LivePusherNew mLivePusher;
     private Camera2Helper camera2Helper;
-    private boolean isPushing;
-    private LiveUtil mLiveUtil;
+    private boolean isLiving;
     private TextureView mTextureView;
     private Context mContext;
+    private VideoParam mVideoParam;
 
-    VideoPusherNew(TextureView textureView, VideoParam videoParam, LiveUtil liveUtil, Context context) {
+    public VideoStreamNew(LivePusherNew livePusher, TextureView textureView, VideoParam videoParam, Context context) {
+        this.mLivePusher = livePusher;
         this.mTextureView = textureView;
         this.mVideoParam = videoParam;
-        this.mLiveUtil = liveUtil;
         this.mContext = context;
         mTextureView.setSurfaceTextureListener(this);
-//        liveUtil.setVideoParams(videoParam.getWidth(), videoParam.getHeight(),
-//                videoParam.getBitRate(), videoParam.getFrameRate());
     }
 
-
-    @Override
-    public void startPush() {
-        isPushing = true;
-    }
-
-    @Override
-    public void stopPush() {
-        isPushing = false;
-    }
-
-    @Override
-    public void release() {
-        stopPush();
-        releasePreview();
+    public void setPreviewDisplay(SurfaceHolder surfaceHolder) {
+//        cameraHelper.setPreviewDisplay(surfaceHolder);
     }
 
     /**
@@ -76,19 +62,21 @@ public class VideoPusherNew extends Pusher implements TextureView.SurfaceTexture
         camera2Helper.start();
     }
 
-    /**
-     * 停止预览
-     */
-    private void stopPreview() {
+    public void switchCamera() {
         if (camera2Helper != null) {
-            camera2Helper.stop();
+            camera2Helper.switchCamera();
         }
     }
 
-    /**
-     * 释放资源
-     */
-    private void releasePreview() {
+    public void startLive() {
+        isLiving = true;
+    }
+
+    public void stopLive() {
+        isLiving = false;
+    }
+
+    public void release() {
         if (camera2Helper != null) {
             camera2Helper.stop();
             camera2Helper.release();
@@ -97,11 +85,11 @@ public class VideoPusherNew extends Pusher implements TextureView.SurfaceTexture
     }
 
     /**
-     * 切换摄像头
+     * 停止预览
      */
-    void switchCamera() {
+    private void stopPreview() {
         if (camera2Helper != null) {
-            camera2Helper.switchCamera();
+            camera2Helper.stop();
         }
     }
 
@@ -128,19 +116,25 @@ public class VideoPusherNew extends Pusher implements TextureView.SurfaceTexture
 
     }
 
+    /**
+     * nv21摄像头数据
+     * @param y plane of y
+     * @param u plane of u
+     * @param v plane of v
+     */
     @Override
     public void onPreviewFrame(byte[] y, byte[] u, byte[] v) {
-        if (isPushing && mLiveUtil != null) {
-            mLiveUtil.pushVideoData(y, u, v);
+        if (isLiving && mLivePusher != null) {
+            mLivePusher.pushVideo(y, u, v);
         }
     }
 
     @Override
     public void onCameraOpened(Size previewSize, int displayOrientation) {
         Log.e(TAG, "onCameraOpened previewSize=" + previewSize.toString());
-        if (mLiveUtil != null && mVideoParam != null) {
-            mLiveUtil.setVideoParams(previewSize.getWidth(), previewSize.getHeight(),
-                    mVideoParam.getBitRate(), mVideoParam.getFrameRate());
+        if (mLivePusher != null && mVideoParam != null) {
+            mLivePusher.setVideoCodecInfo(previewSize.getWidth(), previewSize.getHeight(),
+                    mVideoParam.getFrameRate(), mVideoParam.getBitRate());
         }
     }
 

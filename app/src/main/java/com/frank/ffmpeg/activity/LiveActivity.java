@@ -15,7 +15,7 @@ import android.widget.ToggleButton;
 
 import com.frank.ffmpeg.R;
 
-import com.frank.live.Push.LivePusher;
+import com.frank.live.LivePusherNew;
 import com.frank.live.camera2.Camera2Helper;
 import com.frank.live.listener.LiveStateChangeListener;
 import com.frank.live.param.AudioParam;
@@ -32,7 +32,7 @@ public class LiveActivity extends BaseActivity implements CompoundButton.OnCheck
     private final static String LIVE_URL = "rtmp://192.168.1.3/live/stream";
     private final static int MSG_ERROR = 100;
     private SurfaceView textureView;
-    private LivePusher livePusher;
+    private LivePusherNew livePusher;
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
@@ -80,8 +80,8 @@ public class LiveActivity extends BaseActivity implements CompoundButton.OnCheck
         int audioFormat = AudioFormat.ENCODING_PCM_16BIT;//pcm16位
         int numChannels = 2;//声道数
         AudioParam audioParam = new AudioParam(sampleRate, channelConfig, audioFormat, numChannels);
-//        livePusher = new LivePusher(this, videoParam, audioParam);
-//        livePusher.setPreviewDisplay(textureView.getHolder());
+        livePusher = new LivePusherNew(this, videoParam, audioParam);
+        livePusher.setPreviewDisplay(textureView.getHolder());
     }
 
     @Override
