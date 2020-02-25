@@ -14,7 +14,7 @@ import android.widget.Toast
 import android.widget.ToggleButton
 
 import com.frank.ffmpeg.R
-import com.frank.live.Push.LivePusher
+import com.frank.live.LivePusherNew
 import com.frank.live.camera2.Camera2Helper
 import com.frank.live.listener.LiveStateChangeListener
 import com.frank.live.param.AudioParam
@@ -27,7 +27,7 @@ import com.frank.live.param.VideoParam
 
 class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, LiveStateChangeListener {
     private var textureView: TextureView? = null
-    private var livePusher: LivePusher? = null
+    private var livePusher: LivePusherNew? = null
     @SuppressLint("HandlerLeak")
     private val mHandler = object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -71,7 +71,7 @@ class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, Liv
         val audioFormat = AudioFormat.ENCODING_PCM_16BIT//pcm16位
         val numChannels = 2//声道数
         val audioParam = AudioParam(sampleRate, channelConfig, audioFormat, numChannels)
-        livePusher = LivePusher(textureView, videoParam, audioParam, this)
+        livePusher = LivePusherNew(this@LiveActivity, videoParam, audioParam, textureView)
         //TODO:暂时去掉音频推流
         livePusher!!.setMute(true)
         findViewById<View>(R.id.btn_mute).visibility = View.INVISIBLE
