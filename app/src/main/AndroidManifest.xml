@@ -20,12 +20,14 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainActivity">
         </activity>
         <!-- 音频处理 -->
         <activity android:name=".activity.AudioHandleActivity" />
@@ -54,6 +56,25 @@
         <!--检测多媒体格式数据-->
         <activity android:name=".activity.ProbeFormatActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".kotlin.activity.MainKotlinActivity">
+        </activity>
+        <activity android:name=".kotlin.activity.AudioHandleActivity" />
+        <activity android:name=".kotlin.activity.MediaHandleActivity" />
+        <activity android:name=".kotlin.activity.VideoHandleActivity" />
+        <activity
+            android:name=".kotlin.activity.MediaPlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".kotlin.activity.PushActivity" />
+        <activity
+            android:name=".kotlin.activity.LiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".kotlin.activity.FilterActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".kotlin.activity.VideoPreviewActivity" />
+        <activity android:name=".kotlin.activity.ProbeFormatActivity" />
+
     </application>
 
 </manifest>

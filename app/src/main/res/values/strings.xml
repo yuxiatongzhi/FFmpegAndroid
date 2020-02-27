@@ -72,5 +72,6 @@
     <string name="wrong_video_format">非视频文件</string>
     <string name="converting_video">正在反转视频&#8230;</string>
     <string name="tip_not_mp4_video">该视频不是mp4,无法进行moov前移操作</string>
+    <string name="text_android">Android</string>
 
 </resources>
