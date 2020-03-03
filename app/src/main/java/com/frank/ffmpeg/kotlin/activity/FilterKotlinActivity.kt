@@ -14,8 +14,8 @@ import android.widget.ToggleButton
 
 import com.frank.ffmpeg.R
 import com.frank.ffmpeg.VideoPlayer
-import com.frank.ffmpeg.adapter.HorizontalAdapter
-import com.frank.ffmpeg.listener.OnItemClickListener
+import com.frank.ffmpeg.kotlin.adapter.HorizontalKotlinAdapter
+import com.frank.ffmpeg.kotlin.listener.OnItemClickListener
 import com.frank.ffmpeg.util.FileUtil
 
 import java.util.ArrayList
@@ -43,7 +43,7 @@ class FilterKotlinActivity : BaseKotlinActivity(), SurfaceHolder.Callback {
     private val txtArray = arrayOf("素描", "鲜明", //hue
             "暖蓝", "边缘", "九宫格", "均衡", "矩形", "翻转", //vflip上下翻转,hflip是左右翻转
             "锐化")
-    private var horizontalAdapter: HorizontalAdapter? = null
+    private var horizontalAdapter: HorizontalKotlinAdapter? = null
     private var recyclerView: RecyclerView? = null
     //是否播放音频
     private var playAudio = true
@@ -94,7 +94,7 @@ class FilterKotlinActivity : BaseKotlinActivity(), SurfaceHolder.Callback {
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView!!.layoutManager = linearLayoutManager
         val itemList = ArrayList(Arrays.asList(*txtArray))
-        horizontalAdapter = HorizontalAdapter(itemList)
+        horizontalAdapter = HorizontalKotlinAdapter(itemList)
         recyclerView!!.adapter = horizontalAdapter
 
         btnSelect = getView(R.id.btn_select_file)
@@ -103,15 +103,19 @@ class FilterKotlinActivity : BaseKotlinActivity(), SurfaceHolder.Callback {
 
     //注册监听器
     private fun registerLister() {
-        horizontalAdapter!!.setOnItemClickListener(OnItemClickListener { position ->
-            if (!surfaceCreated)
-                return@OnItemClickListener
-            if (!FileUtil.checkFileExist(videoPath)) {
-                showSelectFile()
-                return@OnItemClickListener
-            }
-            doFilterPlay(position)
-        })
+        with(horizontalAdapter!!) {
+            setOnItemClickListener(object : OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    if (!surfaceCreated)
+                        return
+                    if (!FileUtil.checkFileExist(videoPath)) {
+                        showSelectFile()
+                        return
+                    }
+                    doFilterPlay(position)
+                }
+            })
+        }
 
         surfaceView!!.setOnClickListener {
             btnSelect!!.visibility = View.VISIBLE
