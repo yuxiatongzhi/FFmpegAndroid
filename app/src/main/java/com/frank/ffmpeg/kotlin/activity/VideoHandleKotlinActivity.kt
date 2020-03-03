@@ -22,7 +22,7 @@ import java.io.File
 import com.frank.ffmpeg.handler.FFmpegHandler.MSG_BEGIN
 import com.frank.ffmpeg.handler.FFmpegHandler.MSG_FINISH
 
-class VideoHandleActivity : BaseActivity() {
+class VideoHandleKotlinActivity : BaseKotlinActivity() {
 
     private var progressVideo: ProgressBar? = null
     private var layoutVideoHandle: LinearLayout? = null
@@ -258,7 +258,7 @@ class VideoHandleActivity : BaseActivity() {
 
     companion object {
 
-        private val TAG = VideoHandleActivity::class.java.simpleName
+        private val TAG = VideoHandleKotlinActivity::class.java.simpleName
         private val PATH = Environment.getExternalStorageDirectory().path
         private const val useFFmpegCmd = true
     }

@@ -26,7 +26,7 @@ import java.util.Arrays
  * Created by frank on 2018/6/5.
  */
 
-class FilterActivity : BaseActivity(), SurfaceHolder.Callback {
+class FilterKotlinActivity : BaseKotlinActivity(), SurfaceHolder.Callback {
 
     //本地视频路径
     private var videoPath = ""

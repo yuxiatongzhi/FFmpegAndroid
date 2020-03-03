@@ -16,7 +16,7 @@ import com.frank.ffmpeg.util.FileUtil
  * Created by frank on 2018/2/12.
  */
 
-class MediaPlayerActivity : BaseActivity(), SurfaceHolder.Callback {
+class MediaPlayerKotlinActivity : BaseKotlinActivity(), SurfaceHolder.Callback {
 
     private var surfaceHolder: SurfaceHolder? = null
 
@@ -98,6 +98,6 @@ class MediaPlayerActivity : BaseActivity(), SurfaceHolder.Callback {
 
     companion object {
 
-        private val TAG = MediaPlayerActivity::class.java.simpleName
+        private val TAG = MediaPlayerKotlinActivity::class.java.simpleName
     }
 }

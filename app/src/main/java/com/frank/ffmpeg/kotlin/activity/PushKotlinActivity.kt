@@ -15,7 +15,7 @@ import java.io.File
  * 使用ffmpeg推流直播
  * Created by frank on 2018/2/2.
  */
-class PushActivity : BaseActivity() {
+class PushKotlinActivity : BaseKotlinActivity() {
 
     private var editFilePath: EditText? = null
 
@@ -74,7 +74,7 @@ class PushActivity : BaseActivity() {
 
     companion object {
 
-        private val TAG = PushActivity::class.java.simpleName
+        private val TAG = PushKotlinActivity::class.java.simpleName
         private const val FILE_PATH = "storage/emulated/0/hello.flv"
         private const val LIVE_URL = "rtmp://192.168.1.104/live/stream"
     }

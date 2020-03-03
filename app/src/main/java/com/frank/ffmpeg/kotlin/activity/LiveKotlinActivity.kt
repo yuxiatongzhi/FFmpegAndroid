@@ -25,7 +25,7 @@ import com.frank.live.param.VideoParam
  * Created by frank on 2018/1/28.
  */
 
-class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, LiveStateChangeListener {
+class LiveKotlinActivity : BaseKotlinActivity(), CompoundButton.OnCheckedChangeListener, LiveStateChangeListener {
     private var textureView: TextureView? = null
     private var livePusher: LivePusherNew? = null
     @SuppressLint("HandlerLeak")
@@ -35,7 +35,7 @@ class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, Liv
             if (msg.what == MSG_ERROR) {
                 val errMsg = msg.obj as String
                 if (!TextUtils.isEmpty(errMsg)) {
-                    Toast.makeText(this@LiveActivity, errMsg, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LiveKotlinActivity, errMsg, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -71,7 +71,7 @@ class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, Liv
         val audioFormat = AudioFormat.ENCODING_PCM_16BIT//pcm16位
         val numChannels = 2//声道数
         val audioParam = AudioParam(sampleRate, channelConfig, audioFormat, numChannels)
-        livePusher = LivePusherNew(this@LiveActivity, videoParam, audioParam, textureView)
+        livePusher = LivePusherNew(this@LiveKotlinActivity, videoParam, audioParam, textureView)
         //TODO:暂时去掉音频推流
         livePusher!!.setMute(true)
         findViewById<View>(R.id.btn_mute).visibility = View.INVISIBLE
@@ -119,7 +119,7 @@ class LiveActivity : BaseActivity(), CompoundButton.OnCheckedChangeListener, Liv
 
     companion object {
 
-        private val TAG = LiveActivity::class.java.simpleName
+        private val TAG = LiveKotlinActivity::class.java.simpleName
         private const val LIVE_URL = "rtmp://192.168.1.3/live/stream"
         private const val MSG_ERROR = 100
     }

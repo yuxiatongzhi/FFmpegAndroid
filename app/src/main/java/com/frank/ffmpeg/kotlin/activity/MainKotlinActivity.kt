@@ -11,7 +11,7 @@ import com.frank.ffmpeg.R
  * 使用ffmpeg进行音视频处理入口
  * Created by frank on 2018/1/23.
  */
-class MainKotlinActivity : BaseActivity() {
+class MainKotlinActivity : BaseKotlinActivity() {
 
     override val layoutId: Int
         get() = R.layout.activity_main
@@ -37,23 +37,23 @@ class MainKotlinActivity : BaseActivity() {
         val intent = Intent()
         when (view.id) {
             R.id.btn_audio//音频处理
-            -> intent.setClass(this@MainKotlinActivity, AudioHandleActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, AudioHandleKotlinActivity::class.java)
             R.id.btn_video//视频处理
-            -> intent.setClass(this@MainKotlinActivity, VideoHandleActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, VideoHandleKotlinActivity::class.java)
             R.id.btn_media//音视频处理
-            -> intent.setClass(this@MainKotlinActivity, MediaHandleActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, MediaHandleKotlinActivity::class.java)
             R.id.btn_play//音视频播放
-            -> intent.setClass(this@MainKotlinActivity, MediaPlayerActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, MediaPlayerKotlinActivity::class.java)
             R.id.btn_push//FFmpeg推流
-            -> intent.setClass(this@MainKotlinActivity, PushActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, PushKotlinActivity::class.java)
             R.id.btn_live//实时推流直播:AAC音频编码、H264视频编码、RTMP推流
-            -> intent.setClass(this@MainKotlinActivity, LiveActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, LiveKotlinActivity::class.java)
             R.id.btn_filter//滤镜特效
-            -> intent.setClass(this@MainKotlinActivity, FilterActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, FilterKotlinActivity::class.java)
             R.id.btn_preview//视频拖动实时预览
-            -> intent.setClass(this@MainKotlinActivity, VideoPreviewActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, VideoPreviewKotlinActivity::class.java)
             R.id.btn_probe//解析音视频多媒体格式
-            -> intent.setClass(this@MainKotlinActivity, ProbeFormatActivity::class.java)
+            -> intent.setClass(this@MainKotlinActivity, ProbeFormatKotlinActivity::class.java)
             else -> {
             }
         }

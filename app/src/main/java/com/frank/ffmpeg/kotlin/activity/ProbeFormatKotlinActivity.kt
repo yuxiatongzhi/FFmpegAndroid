@@ -26,7 +26,7 @@ import com.frank.ffmpeg.handler.FFmpegHandler.MSG_FINISH
  * Created by frank on 2020/1/7.
  */
 
-class ProbeFormatActivity : BaseActivity() {
+class ProbeFormatKotlinActivity : BaseKotlinActivity() {
 
     private var txtProbeFormat: TextView? = null
     private var progressProbe: ProgressBar? = null

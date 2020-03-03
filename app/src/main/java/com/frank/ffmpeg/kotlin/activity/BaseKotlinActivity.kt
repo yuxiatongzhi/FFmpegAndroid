@@ -21,7 +21,7 @@ import com.frank.ffmpeg.util.ContentUtil
  * Created by frank on 2019/11/2.
  */
 
-abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BaseKotlinActivity : AppCompatActivity(), View.OnClickListener {
 
     internal abstract val layoutId: Int
 
@@ -115,7 +115,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
 
-        private val TAG = BaseActivity::class.java.getSimpleName()
+        private val TAG = BaseKotlinActivity::class.java.simpleName
 
         private const val REQUEST_CODE = 1234
         private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)

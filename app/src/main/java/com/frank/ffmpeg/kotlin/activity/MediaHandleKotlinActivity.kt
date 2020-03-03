@@ -26,7 +26,7 @@ import com.frank.ffmpeg.handler.FFmpegHandler.MSG_FINISH
  * 使用ffmpeg进行音视频合成与分离
  * Created by frank on 2018/1/23.
  */
-class MediaHandleActivity : BaseActivity() {
+class MediaHandleKotlinActivity : BaseKotlinActivity() {
     private var videoFile: String? = null
     private val temp = PATH + File.separator + "temp.mp4"
 
@@ -170,7 +170,7 @@ class MediaHandleActivity : BaseActivity() {
 
     companion object {
 
-        private val TAG = MediaHandleActivity::class.java.simpleName
+        private val TAG = MediaHandleKotlinActivity::class.java.simpleName
         private val PATH = Environment.getExternalStorageDirectory().path
     }
 }

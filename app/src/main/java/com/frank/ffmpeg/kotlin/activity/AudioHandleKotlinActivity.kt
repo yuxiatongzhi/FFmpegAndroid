@@ -27,7 +27,7 @@ import com.frank.ffmpeg.handler.FFmpegHandler.MSG_FINISH
  * Created by frank on 2018/1/23.
  */
 
-class AudioHandleActivity : BaseActivity() {
+class AudioHandleKotlinActivity : BaseKotlinActivity() {
     private val appendFile = PATH + File.separator + "test.mp3"
 
     private var progressAudio: ProgressBar? = null

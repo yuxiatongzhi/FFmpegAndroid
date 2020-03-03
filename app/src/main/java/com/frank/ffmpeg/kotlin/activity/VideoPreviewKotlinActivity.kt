@@ -24,7 +24,7 @@ import com.frank.ffmpeg.handler.FFmpegHandler.MSG_TOAST
  * Created by frank on 2019/11/16.
  */
 
-class VideoPreviewActivity : BaseActivity(), VideoPreviewBar.PreviewBarCallback {
+class VideoPreviewKotlinActivity : BaseKotlinActivity(), VideoPreviewBar.PreviewBarCallback {
 
     private var mediaPlayer: MediaPlayer? = null
     private var surfaceVideo: SurfaceView? = null
@@ -138,7 +138,7 @@ class VideoPreviewActivity : BaseActivity(), VideoPreviewBar.PreviewBarCallback 
 
     companion object {
 
-        private val TAG = VideoPreviewActivity::class.java.simpleName
+        private val TAG = VideoPreviewKotlinActivity::class.java.simpleName
         private const val TIME_UPDATE = 1000
         private const val MSG_UPDATE = 1234
     }

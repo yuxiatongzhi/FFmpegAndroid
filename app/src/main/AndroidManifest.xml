@@ -59,21 +59,21 @@
 
         <activity android:name=".kotlin.activity.MainKotlinActivity">
         </activity>
-        <activity android:name=".kotlin.activity.AudioHandleActivity" />
-        <activity android:name=".kotlin.activity.MediaHandleActivity" />
-        <activity android:name=".kotlin.activity.VideoHandleActivity" />
+        <activity android:name=".kotlin.activity.AudioHandleKotlinActivity" />
+        <activity android:name=".kotlin.activity.MediaHandleKotlinActivity" />
+        <activity android:name=".kotlin.activity.VideoHandleKotlinActivity" />
         <activity
-            android:name=".kotlin.activity.MediaPlayerActivity"
+            android:name=".kotlin.activity.MediaPlayerKotlinActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".kotlin.activity.PushActivity" />
+        <activity android:name=".kotlin.activity.PushKotlinActivity" />
         <activity
-            android:name=".kotlin.activity.LiveActivity"
+            android:name=".kotlin.activity.LiveKotlinActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".kotlin.activity.FilterActivity"
+            android:name=".kotlin.activity.FilterKotlinActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".kotlin.activity.VideoPreviewActivity" />
-        <activity android:name=".kotlin.activity.ProbeFormatActivity" />
+        <activity android:name=".kotlin.activity.VideoPreviewKotlinActivity" />
+        <activity android:name=".kotlin.activity.ProbeFormatKotlinActivity" />
 
     </application>
 
