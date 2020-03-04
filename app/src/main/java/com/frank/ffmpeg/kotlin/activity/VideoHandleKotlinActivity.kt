@@ -12,7 +12,7 @@ import android.widget.ProgressBar
 
 import com.frank.ffmpeg.FFmpegCmd
 import com.frank.ffmpeg.R
-import com.frank.ffmpeg.format.VideoLayout
+import com.frank.ffmpeg.kotlin.format.VideoKotlinLayout
 import com.frank.ffmpeg.handler.FFmpegHandler
 import com.frank.ffmpeg.util.FFmpegUtil
 import com.frank.ffmpeg.util.FileUtil
@@ -163,7 +163,7 @@ class VideoHandleKotlinActivity : BaseKotlinActivity() {
                 if (!FileUtil.checkFileExist(input1) || !FileUtil.checkFileExist(input2)) {
                     return
                 }
-                commandLine = FFmpegUtil.multiVideo(input1, input2, outputFile, VideoLayout.LAYOUT_HORIZONTAL)
+                commandLine = FFmpegUtil.multiVideo(input1, input2, outputFile, VideoKotlinLayout.LAYOUT_HORIZONTAL)
             }
             R.id.btn_reverse_video//视频反序倒播
             -> {
