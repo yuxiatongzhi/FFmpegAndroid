@@ -1,17 +1,14 @@
 package com.frank.ffmpeg.kotlin.model
 
-import com.frank.ffmpeg.model.AudioBean
-import com.frank.ffmpeg.model.VideoBean
-
 /**
  * the model of media data
  * Created by frank on 2020/3/4.
  */
 class MediaKotlinBean {
 
-    var videoBean: VideoBean? = null
+    var videoBean: VideoKotlinBean? = null
 
-    var audioBean: AudioBean? = null
+    var audioBean: AudioKotlinBean? = null
 
     // "duration": "313.330000"
     var duration: Long = 0

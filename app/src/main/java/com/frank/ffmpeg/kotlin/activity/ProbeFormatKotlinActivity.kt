@@ -11,15 +11,13 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 
 import com.frank.ffmpeg.R
-import com.frank.ffmpeg.handler.FFmpegHandler
-
-import com.frank.ffmpeg.model.MediaBean
-import com.frank.ffmpeg.tool.JsonParseTool
+import com.frank.ffmpeg.kotlin.handler.FFmpegKotlinHandler
+import com.frank.ffmpeg.kotlin.handler.FFmpegKotlinHandler.Companion.MSG_BEGIN
+import com.frank.ffmpeg.kotlin.handler.FFmpegKotlinHandler.Companion.MSG_FINISH
+import com.frank.ffmpeg.kotlin.model.MediaKotlinBean
+import com.frank.ffmpeg.kotlin.tool.JsonParseKotlinTool
 import com.frank.ffmpeg.util.FFmpegUtil
 import com.frank.ffmpeg.util.FileUtil
-
-import com.frank.ffmpeg.handler.FFmpegHandler.MSG_BEGIN
-import com.frank.ffmpeg.handler.FFmpegHandler.MSG_FINISH
 
 /**
  * Using ffprobe to parse media format data
@@ -31,7 +29,7 @@ class ProbeFormatKotlinActivity : BaseKotlinActivity() {
     private var txtProbeFormat: TextView? = null
     private var progressProbe: ProgressBar? = null
     private var layoutProbe: RelativeLayout? = null
-    private var ffmpegHandler: FFmpegHandler? = null
+    private var ffmpegHandler: FFmpegKotlinHandler? = null
 
     @SuppressLint("HandlerLeak")
     private val mHandler = object : Handler() {
@@ -45,8 +43,8 @@ class ProbeFormatKotlinActivity : BaseKotlinActivity() {
                 MSG_FINISH -> {
                     progressProbe!!.visibility = View.GONE
                     layoutProbe!!.visibility = View.VISIBLE
-                    val result = msg.obj as MediaBean
-                    val resultFormat = JsonParseTool.stringFormat(result)
+                    val result = msg.obj as MediaKotlinBean
+                    val resultFormat = JsonParseKotlinTool.stringFormat(result)
                     if (!TextUtils.isEmpty(resultFormat) && txtProbeFormat != null) {
                         txtProbeFormat!!.text = resultFormat
                     }
@@ -64,7 +62,7 @@ class ProbeFormatKotlinActivity : BaseKotlinActivity() {
         super.onCreate(savedInstanceState)
 
         initView()
-        ffmpegHandler = FFmpegHandler(mHandler)
+        ffmpegHandler = FFmpegKotlinHandler(mHandler)
     }
 
     private fun initView() {
