@@ -14,12 +14,12 @@ import java.nio.ByteBuffer
  * Created by frank on 2020/04/06.
  */
 
-class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onDataCallback : OnDataCallback){
+class HardwareKotlinDecode constructor(surface: Surface, filePath: String, onDataCallback: OnDataCallback) {
 
-    private var mSurface : Surface ?= null
-    private var mFilePath : String = ""
-    private var mVideoDecodeThread : VideoDecodeThread ?= null
-    private var mCallback : OnDataCallback ?= null
+    private var mSurface: Surface? = null
+    private var mFilePath: String = ""
+    private var mVideoDecodeThread: VideoDecodeThread? = null
+    private var mCallback: OnDataCallback? = null
 
     init {
         this.mSurface = surface
@@ -28,7 +28,7 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
     }
 
     interface OnDataCallback {
-        fun onData(duration : Long)
+        fun onData(duration: Long)
     }
 
     public fun decode() {
@@ -36,13 +36,13 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
         mVideoDecodeThread!!.start()
     }
 
-    public fun seekTo(seekPosition : Long) {
+    public fun seekTo(seekPosition: Long) {
         if (!mVideoDecodeThread!!.isInterrupted) {
             mVideoDecodeThread!!.seekTo(seekPosition)
         }
     }
 
-    public fun setPreviewing(previewing : Boolean) {
+    public fun setPreviewing(previewing: Boolean) {
         mVideoDecodeThread!!.isPreviewing = previewing;
     }
 
@@ -56,10 +56,10 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
 
     private inner class VideoDecodeThread(filePath: String) : Thread() {
 
-        private var mediaExtractor : MediaExtractor ?= null
-        private var mediaCodec : MediaCodec ?= null
-        var isPreviewing : Boolean = false
-        private var mFilePath : String = filePath
+        private var mediaExtractor: MediaExtractor? = null
+        private var mediaCodec: MediaCodec? = null
+        var isPreviewing: Boolean = false
+        private var mFilePath: String = filePath
 
         fun seekTo(seekPosition: Long) {
             try {
@@ -74,12 +74,12 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
                 mediaCodec!!.stop()
                 mediaCodec!!.release()
                 mediaExtractor!!.release()
-            }catch (e : Exception) {
+            } catch (e: Exception) {
                 Log.e(TAG, "release error=$e")
             }
         }
 
-        fun setPreviewRatio(mediaFormat : MediaFormat) {
+        fun setPreviewRatio(mediaFormat: MediaFormat) {
             val videoWidth = mediaFormat.getInteger(MediaFormat.KEY_WIDTH)
             val videoHeight = mediaFormat.getInteger(MediaFormat.KEY_HEIGHT)
             val previewRatio = when {
@@ -97,7 +97,7 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
         override fun run() {
             super.run()
             mediaExtractor = MediaExtractor()
-            var mediaFormat : MediaFormat ?= null
+            var mediaFormat: MediaFormat? = null
             var mimeType = ""
 
             try {
@@ -112,9 +112,9 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
                     }
                 }
 
-                val width : Int = mediaFormat!!.getInteger(MediaFormat.KEY_WIDTH)
-                val height : Int = mediaFormat.getInteger(MediaFormat.KEY_HEIGHT)
-                val duration : Long = mediaFormat.getLong(MediaFormat.KEY_DURATION)
+                val width: Int = mediaFormat!!.getInteger(MediaFormat.KEY_WIDTH)
+                val height: Int = mediaFormat.getInteger(MediaFormat.KEY_HEIGHT)
+                val duration: Long = mediaFormat.getLong(MediaFormat.KEY_DURATION)
                 mCallback!!.onData(duration)
                 Log.i(TAG, "width=$width--height=$height--duration=$duration")
                 setPreviewRatio(mediaFormat)
@@ -122,7 +122,7 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
                 mediaCodec!!.configure(mediaFormat, mSurface, null, 0)
                 mediaCodec!!.start()
                 val inputBuffers = mediaCodec!!.getInputBuffers()
-                val bufferInfo : MediaCodec.BufferInfo = MediaCodec.BufferInfo()
+                val bufferInfo: MediaCodec.BufferInfo = MediaCodec.BufferInfo()
 
                 while (!isInterrupted) {
                     if (!isPreviewing) {
@@ -131,7 +131,7 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
                     }
                     val inputIndex = mediaCodec!!.dequeueInputBuffer(DEQUEUE_TIME)
                     if (inputIndex >= 0) {
-                        val inputBuffer : ByteBuffer = inputBuffers[inputIndex]
+                        val inputBuffer: ByteBuffer = inputBuffers[inputIndex]
                         val sampleSize = mediaExtractor!!.readSampleData(inputBuffer, 0)
                         if (sampleSize < 0) {
                             mediaCodec!!.queueInputBuffer(inputIndex, 0, 0, 0,
@@ -151,7 +151,7 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
                             mediaCodec!!.releaseOutputBuffer(outputIndex, true)
                     }
                 }
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 Log.e(TAG, "decode error=$e")
             }
         }
@@ -161,8 +161,8 @@ class HardwareKotlinDecode constructor(surface : Surface, filePath : String, onD
     companion object {
         private val TAG = HardwareKotlinDecode::class.java.simpleName
 
-        private const val DEQUEUE_TIME : Long = 10 * 1000
-        private const val SLEEP_TIME : Long = 10
+        private const val DEQUEUE_TIME: Long = 10 * 1000
+        private const val SLEEP_TIME: Long = 10
 
         private const val RATIO_1080 = 1080
         private const val RATIO_480 = 480
