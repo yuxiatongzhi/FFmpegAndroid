@@ -6,7 +6,7 @@
     <string name="audio_mix">音频混合</string>
     <string name="audio_play">音频解码AudioTrack播放</string>
     <string name="audio_opensl">音频解码OpenSL播放</string>
-    <string name="audio_encode">音频编码</string>
+    <string name="audio_encode">PCM编码</string>
     <string name="pcm_concat">PCM合并</string>
     <string name="audio_speed">音频速度</string>
     <string name="audio_effect">音乐均衡器</string>
@@ -52,6 +52,7 @@
     <string name="video_moov">MOOV前移</string>
     <string name="video_speed">播放倍率</string>
     <string name="video_flv">FLV索引</string>
+    <string name="video_thumbnail">插入封面</string>
 
     <string name="swap">切换</string>
     <string name="start">开始</string>
